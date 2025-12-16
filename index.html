@@ -4,100 +4,124 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Hesham Abdelhamed — Portfolio</title>
-
-  <!-- Fonts -->
+  
+  <!-- Fonts: Inter for readability, JetBrains Mono for Coding/Cyber feel -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-
-  <!-- Main CSS -->
+  
+  <!-- Link to External CSS -->
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+
+<!-- Visual Effects Layer -->
+<canvas id="cyber-canvas"></canvas>
+<div id="cursor-dot"></div>
+<div id="cursor-glow"></div>
+<div class="noise-overlay"></div>
 
 <header class="topbar">
   <div class="container topbar-inner">
     <div class="brand">
       <div class="logo">H</div>
       <div class="brand-text">
-        <div class="name glitch-text">Hesham Abdelhamed</div>
+        <div class="name glitch-text" data-text="Hesham Abdelhamed">Hesham Abdelhamed</div>
         <div class="role" data-i18n="subtitle">Network Engineer — Cybersecurity — IT Specialist</div>
       </div>
     </div>
     <div class="actions">
-      <button id="langToggle" class="btn small">AR</button>
-      <button id="themeToggle" class="btn small">Light Mode</button>
+      <button id="langToggle" class="btn small cyber-btn">AR</button>
+      <button id="themeToggle" class="btn small cyber-btn">Light Mode</button>
     </div>
   </div>
 </header>
 
 <main class="container">
 
+  <!-- HERO -->
   <section class="hero card reveal-section">
     <div class="hero-text">
       <h1 class="hero-title" data-i18n="hero_title">Hi, I'm Hesham</h1>
+
       <p class="lead" data-i18n="hero_lead">
         IT student specializing in Network Engineering and Cybersecurity.
         NTI-accredited CCNA holder (MCIT).
       </p>
-      <a class="btn primary glow-btn" href="#contact" data-i18n="contact_me">Contact me</a>
+
+      <div class="buttons">
+        <a class="btn primary glow-btn" href="#contact" data-i18n="contact_me">Contact me</a>
+      </div>
     </div>
+
     <div class="hero-avatar">
-      <img id="profileImage" src="assets/img/profile.png" alt="Hesham Avatar">
+      <div class="avatar-frame">
+        <img id="profileImage" src="assets/img/profile.png" onerror="this.src='https://ui-avatars.com/api/?name=Hesham+Abdelhamed&background=00f3ff&color=000&size=250'" alt="Hesham Avatar">
+      </div>
     </div>
   </section>
 
+  <!-- SKILLS -->
   <section id="skills" class="card reveal-section">
-    <h2 data-i18n="skills">Skills</h2>
+    <h2 data-i18n="skills" class="section-title">Skills</h2>
     <div class="skills-grid">
-      <div class="skill-box">
+      <div class="skill-box tilt-card">
         <h3>Networking</h3>
         <ul>
           <li>Routing & Switching, VLANs, STP, OSPF</li>
           <li>Cisco IOS · Packet Tracer · GNS3</li>
-          <li>Basic BGP & troubleshooting</li>
+          <li>Basic BGP & network troubleshooting</li>
         </ul>
       </div>
-      <div class="skill-box">
+      <div class="skill-box tilt-card">
         <h3 data-i18n="security">Security</h3>
         <ul>
           <li>Firewalls, VPN, IDS/IPS</li>
-          <li>TLS/SSL, hashing, RBAC</li>
+          <li>TLS/SSL, hashing (bcrypt), RBAC</li>
         </ul>
       </div>
-      <div class="skill-box">
+      <div class="skill-box tilt-card">
         <h3 data-i18n="systems">Systems</h3>
         <ul>
           <li>Windows Server · Active Directory</li>
-          <li>Linux (Ubuntu) · VMware</li>
-          <li>Backups & virtualization</li>
+          <li>Linux admin (Ubuntu) · VMware</li>
+          <li>Backups & virtualization basics</li>
         </ul>
       </div>
     </div>
   </section>
 
+  <!-- PROJECTS -->
   <section id="projects" class="card reveal-section">
-    <h2 data-i18n="projects">Projects</h2>
+    <h2 data-i18n="projects" class="section-title">Projects</h2>
     <div id="projectsGrid" class="cards">
       <div class="placeholder" data-i18n="loading">Loading projects...</div>
     </div>
   </section>
 
+  <!-- CONTACT -->
   <section id="contact" class="card reveal-section">
-    <h2 data-i18n="contact">Contact</h2>
+    <h2 data-i18n="contact" class="section-title">Contact</h2>
     <div class="contact-grid">
-      <a class="contact-btn" href="mailto:abdelhamedhesham93@gmail.com">📧 Email</a>
-      <a class="contact-btn" href="https://linkedin.com/in/hesham-cybersecurity" target="_blank">🔗 LinkedIn</a>
-      <a class="contact-btn" href="https://wa.me/201016591693" target="_blank">💬 WhatsApp</a>
+      <a class="contact-btn magnetic-btn" href="mailto:abdelhamedhesham93@gmail.com">
+        <span class="icon">📧</span> Email
+      </a>
+      <a class="contact-btn magnetic-btn" href="https://linkedin.com/in/hesham-cybersecurity" target="_blank">
+        <span class="icon">🔗</span> LinkedIn
+      </a>
+      <a class="contact-btn magnetic-btn" href="https://wa.me/201016591693" target="_blank">
+        <span class="icon">💬</span> WhatsApp
+      </a>
     </div>
   </section>
 
 </main>
 
 <footer class="footer">
-  © <span id="year"></span> Hesham Abdelhamed — All rights reserved
+  <div class="container">© <span id="year"></span> Hesham Abdelhamed — All rights reserved</div>
 </footer>
 
-<script src="assets/js/app.js" defer></script>
+<!-- Link to External JS -->
+<script src="assets/js/app.js"></script>
 </body>
 </html>
