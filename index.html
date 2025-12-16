@@ -15,21 +15,13 @@
 </head>
 <body>
 
-<!-- Visual Effects -->
-<canvas id="cyber-canvas"></canvas>
-<div id="cursor-dot"></div>
-<div id="cursor-glow"></div>
-<div class="noise-overlay"></div>
-
 <header class="topbar">
   <div class="container topbar-inner">
     <div class="brand">
       <div class="logo">H</div>
       <div class="brand-text">
         <div class="name glitch-text">Hesham Abdelhamed</div>
-        <div class="role" data-i18n="subtitle">
-          Network Engineer — Cybersecurity — IT Specialist
-        </div>
+        <div class="role" data-i18n="subtitle">Network Engineer — Cybersecurity — IT Specialist</div>
       </div>
     </div>
     <div class="actions">
@@ -41,7 +33,6 @@
 
 <main class="container">
 
-  <!-- HERO -->
   <section class="hero card reveal-section">
     <div class="hero-text">
       <h1 class="hero-title" data-i18n="hero_title">Hi, I'm Hesham</h1>
@@ -49,23 +40,17 @@
         IT student specializing in Network Engineering and Cybersecurity.
         NTI-accredited CCNA holder (MCIT).
       </p>
-      <div class="buttons">
-        <a class="btn primary glow-btn" href="#contact" data-i18n="contact_me">Contact me</a>
-      </div>
+      <a class="btn primary glow-btn" href="#contact" data-i18n="contact_me">Contact me</a>
     </div>
-
     <div class="hero-avatar">
-      <div class="avatar-frame">
-        <img id="profileImage" src="assets/img/profile.png" alt="Hesham Avatar">
-      </div>
+      <img id="profileImage" src="assets/img/profile.png" alt="Hesham Avatar">
     </div>
   </section>
 
-  <!-- SKILLS -->
   <section id="skills" class="card reveal-section">
-    <h2 class="section-title" data-i18n="skills">Skills</h2>
+    <h2 data-i18n="skills">Skills</h2>
     <div class="skills-grid">
-      <div class="skill-box tilt-card">
+      <div class="skill-box">
         <h3>Networking</h3>
         <ul>
           <li>Routing & Switching, VLANs, STP, OSPF</li>
@@ -73,14 +58,14 @@
           <li>Basic BGP & troubleshooting</li>
         </ul>
       </div>
-      <div class="skill-box tilt-card">
+      <div class="skill-box">
         <h3 data-i18n="security">Security</h3>
         <ul>
           <li>Firewalls, VPN, IDS/IPS</li>
           <li>TLS/SSL, hashing, RBAC</li>
         </ul>
       </div>
-      <div class="skill-box tilt-card">
+      <div class="skill-box">
         <h3 data-i18n="systems">Systems</h3>
         <ul>
           <li>Windows Server · Active Directory</li>
@@ -91,21 +76,19 @@
     </div>
   </section>
 
-  <!-- PROJECTS -->
   <section id="projects" class="card reveal-section">
-    <h2 class="section-title" data-i18n="projects">Projects</h2>
+    <h2 data-i18n="projects">Projects</h2>
     <div id="projectsGrid" class="cards">
       <div class="placeholder" data-i18n="loading">Loading projects...</div>
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact" class="card reveal-section">
-    <h2 class="section-title" data-i18n="contact">Contact</h2>
+    <h2 data-i18n="contact">Contact</h2>
     <div class="contact-grid">
-      <a class="contact-btn magnetic-btn" href="mailto:abdelhamedhesham93@gmail.com">📧 Email</a>
-      <a class="contact-btn magnetic-btn" href="https://linkedin.com/in/hesham-cybersecurity" target="_blank">🔗 LinkedIn</a>
-      <a class="contact-btn magnetic-btn" href="https://wa.me/201016591693" target="_blank">💬 WhatsApp</a>
+      <a class="contact-btn" href="mailto:abdelhamedhesham93@gmail.com">📧 Email</a>
+      <a class="contact-btn" href="https://linkedin.com/in/hesham-cybersecurity" target="_blank">🔗 LinkedIn</a>
+      <a class="contact-btn" href="https://wa.me/201016591693" target="_blank">💬 WhatsApp</a>
     </div>
   </section>
 
@@ -115,7 +98,6 @@
   © <span id="year"></span> Hesham Abdelhamed — All rights reserved
 </footer>
 
-<!-- Main JS -->
 <script src="assets/js/app.js" defer></script>
 </body>
 </html>
