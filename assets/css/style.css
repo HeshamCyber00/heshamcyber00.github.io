@@ -220,7 +220,7 @@ a{text-decoration:none;color:inherit}
   transform:translateY(30px);
   transition:.8s ease;
 }
-.reveal-section.is-visible{
+..reveal-section{
   opacity:1;
   transform:none;
 }
