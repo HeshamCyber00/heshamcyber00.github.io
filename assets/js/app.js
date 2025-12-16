@@ -1,11 +1,7 @@
-/* =========================
-   Hesham Portfolio — App JS
-========================= */
+const PUBLIC_JSON_PATH='assets/data/projects.json';
+const LS={prefs:'prefs_v1'};
 
-const PUBLIC_JSON_PATH = 'assets/data/projects.json';
-const LS = { prefs:'prefs_v1' };
-
-const I18N = {
+const I18N={
   en:{
     subtitle:"Network Engineer — Cybersecurity — IT Specialist",
     hero_title:"Hi, I'm Hesham",
@@ -30,15 +26,9 @@ const I18N = {
   }
 };
 
-function loadPrefs(){
-  try{return JSON.parse(localStorage.getItem(LS.prefs)||'{}')}
-  catch{return{}}
-}
-function savePrefs(p){
-  localStorage.setItem(LS.prefs,JSON.stringify({...loadPrefs(),...p}))
-}
+function loadPrefs(){try{return JSON.parse(localStorage.getItem(LS.prefs)||'{}')}catch{return{}}}
+function savePrefs(p){localStorage.setItem(LS.prefs,JSON.stringify({...loadPrefs(),...p}))}
 
-/* ---------- Theme ---------- */
 function initTheme(){
   const btn=document.getElementById('themeToggle');
   const apply=t=>{
@@ -50,7 +40,6 @@ function initTheme(){
   btn.onclick=()=>apply(document.body.classList.contains('light')?'dark':'light');
 }
 
-/* ---------- Language ---------- */
 function initLang(){
   const btn=document.getElementById('langToggle');
   const apply=l=>{
@@ -68,20 +57,6 @@ function initLang(){
   btn.onclick=()=>apply(loadPrefs().lang==='ar'?'en':'ar');
 }
 
-/* ---------- Reveal ---------- */
-function initReveal(){
-  const io=new IntersectionObserver(es=>{
-    es.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.classList.add('is-visible');
-        io.unobserve(e.target);
-      }
-    })
-  },{threshold:.15});
-  document.querySelectorAll('.reveal-section').forEach(s=>io.observe(s));
-}
-
-/* ---------- Projects ---------- */
 async function renderProjects(){
   const grid=document.getElementById('projectsGrid');
   try{
@@ -89,17 +64,13 @@ async function renderProjects(){
     const d=await r.json();
     grid.innerHTML='';
     if(!d.projects.length){
-      grid.innerHTML=`<div>${I18N[loadPrefs().lang||'en'].no_projects}</div>`;
+      grid.textContent=I18N[loadPrefs().lang||'en'].no_projects;
       return;
     }
     d.projects.forEach(p=>{
       const c=document.createElement('div');
       c.className='project-card';
-      c.innerHTML=`
-        ${p.image?`<img src="${p.image}">`:''}
-        <strong>${p.title}</strong>
-        <p>${p.description||''}</p>
-      `;
+      c.innerHTML=`<strong>${p.title}</strong><p>${p.description||''}</p>`;
       grid.appendChild(c);
     });
   }catch{
@@ -107,11 +78,9 @@ async function renderProjects(){
   }
 }
 
-/* ---------- Boot ---------- */
 document.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('year').textContent=new Date().getFullYear();
   initTheme();
   initLang();
-  initReveal();
   renderProjects();
 });
