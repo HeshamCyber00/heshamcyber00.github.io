@@ -1,143 +1,117 @@
 /* =========================
-   App JS — EN/AR + RTL + Theme + Projects Grid
+   Hesham Portfolio — App JS
 ========================= */
 
 const PUBLIC_JSON_PATH = 'assets/data/projects.json';
 const LS = { prefs:'prefs_v1' };
 
-/* --- Contact links --- */
-const CONTACT = {
-  email: 'mailto:abdelhamedhesham93@gmail.com',
-  linkedin: 'https://linkedin.com/in/hesham-cybersecurity',
-  whatsapp: 'https://wa.me/201016591693'
-};
-
-/* --- i18n --- */
 const I18N = {
-  en: {
-    subtitle: "Network Engineer — Cybersecurity — IT Specialist",
-    hero_title: "Hi, I'm Hesham",
-    hero_lead:
-      "IT student specializing in Network Engineering and Cybersecurity. NTI-accredited CCNA holder (MCIT).",
-    contact_me: "Contact me",
-    skills: "Skills",
-    projects: "Projects",
-    loading: "Loading projects...",
-    no_projects: "No projects added yet.",
-    contact: "Contact",
-    email_btn: "Email"
+  en:{
+    subtitle:"Network Engineer — Cybersecurity — IT Specialist",
+    hero_title:"Hi, I'm Hesham",
+    hero_lead:"IT student specializing in Network Engineering and Cybersecurity. NTI-accredited CCNA holder (MCIT).",
+    contact_me:"Contact me",
+    skills:"Skills",
+    projects:"Projects",
+    loading:"Loading projects...",
+    no_projects:"No projects yet.",
+    contact:"Contact"
   },
-  ar: {
-    subtitle: "مهندس شبكات — أمن المعلومات — مختص تقنية معلومات",
-    hero_title: "مرحبًا، أنا هشام",
-    hero_lead:
-      "طالب تقنية معلومات متخصص في هندسة الشبكات والأمن السيبراني. حاصل على CCNA معتمدة من NTI (وزارة الاتصالات).",
-    contact_me: "تواصل معي",
-    skills: "المهارات",
-    projects: "المشاريع",
-    loading: "جاري تحميل المشاريع...",
-    no_projects: "لا توجد مشاريع مضافة بعد.",
-    contact: "التواصل",
-    email_btn: "البريد الإلكتروني"
+  ar:{
+    subtitle:"مهندس شبكات — أمن المعلومات — مختص تقنية معلومات",
+    hero_title:"مرحبًا، أنا هشام",
+    hero_lead:"طالب تقنية معلومات متخصص في هندسة الشبكات والأمن السيبراني.",
+    contact_me:"تواصل معي",
+    skills:"المهارات",
+    projects:"المشاريع",
+    loading:"جاري تحميل المشاريع...",
+    no_projects:"لا توجد مشاريع بعد.",
+    contact:"التواصل"
   }
 };
 
-/* --- Prefs --- */
-function loadPrefs(){ try{return JSON.parse(localStorage.getItem(LS.prefs)||'{}')}catch{return{}} }
-function savePrefs(p){ const c=loadPrefs(); localStorage.setItem(LS.prefs, JSON.stringify({...c,...p})) }
-
-/* --- Theme --- */
-function applyTheme(theme){
-  if(theme==='light') document.body.classList.add('light');
-  else document.body.classList.remove('light');
-  document.getElementById('themeToggle').textContent =
-    theme==='light' ? 'Dark Mode' : 'Light Mode';
-  savePrefs({theme});
+function loadPrefs(){
+  try{return JSON.parse(localStorage.getItem(LS.prefs)||'{}')}
+  catch{return{}}
 }
+function savePrefs(p){
+  localStorage.setItem(LS.prefs,JSON.stringify({...loadPrefs(),...p}))
+}
+
+/* ---------- Theme ---------- */
 function initTheme(){
-  applyTheme(loadPrefs().theme || 'dark');
-  document.getElementById('themeToggle').addEventListener('click',()=>{
-    const next = document.body.classList.contains('light') ? 'dark' : 'light';
-    applyTheme(next);
-  });
+  const btn=document.getElementById('themeToggle');
+  const apply=t=>{
+    document.body.classList.toggle('light',t==='light');
+    btn.textContent=t==='light'?'Dark Mode':'Light Mode';
+    savePrefs({theme:t});
+  };
+  apply(loadPrefs().theme||'dark');
+  btn.onclick=()=>apply(document.body.classList.contains('light')?'dark':'light');
 }
 
-/* --- Language --- */
-function applyLang(lang){
-  const dict = I18N[lang] || I18N.en;
-  document.documentElement.setAttribute('lang', lang);
-  document.documentElement.setAttribute('dir', lang==='ar' ? 'rtl' : 'ltr');
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const key = el.getAttribute('data-i18n');
-    if(dict[key]) el.textContent = dict[key];
-  });
-  document.getElementById('langToggle').textContent = lang==='ar' ? 'EN' : 'AR';
-  savePrefs({lang});
-}
+/* ---------- Language ---------- */
 function initLang(){
-  applyLang(loadPrefs().lang || 'en');
-  document.getElementById('langToggle').addEventListener('click',()=>{
-    const cur = loadPrefs().lang || 'en';
-    applyLang(cur==='en' ? 'ar' : 'en');
-    renderProjects();
-  });
+  const btn=document.getElementById('langToggle');
+  const apply=l=>{
+    const d=I18N[l];
+    document.documentElement.lang=l;
+    document.documentElement.dir=l==='ar'?'rtl':'ltr';
+    document.querySelectorAll('[data-i18n]').forEach(e=>{
+      const k=e.dataset.i18n;
+      if(d[k]) e.textContent=d[k];
+    });
+    btn.textContent=l==='ar'?'EN':'AR';
+    savePrefs({lang:l});
+  };
+  apply(loadPrefs().lang||'en');
+  btn.onclick=()=>apply(loadPrefs().lang==='ar'?'en':'ar');
 }
 
-/* --- Contact buttons --- */
-function initContact(){
-  document.getElementById('emailBtn')?.setAttribute('href', CONTACT.email);
-  document.getElementById('linkedinBtn')?.setAttribute('href', CONTACT.linkedin);
-  document.getElementById('waBtn')?.setAttribute('href', CONTACT.whatsapp);
+/* ---------- Reveal ---------- */
+function initReveal(){
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('is-visible');
+        io.unobserve(e.target);
+      }
+    })
+  },{threshold:.15});
+  document.querySelectorAll('.reveal-section').forEach(s=>io.observe(s));
 }
 
-/* --- Public JSON --- */
-async function getPublicData(){
-  try{
-    const r = await fetch(PUBLIC_JSON_PATH + `?t=${Date.now()}`, { cache:'no-store' });
-    if(!r.ok) throw 0;
-    return await r.json();
-  }catch{
-    return { profileImage:'assets/img/profile.png', projects:[] };
-  }
-}
-
+/* ---------- Projects ---------- */
 async function renderProjects(){
-  const data = await getPublicData();
-  const img = document.getElementById('profileImage');
-  if(img) img.src = data.profileImage || 'assets/img/profile.png';
-
-  const grid = document.getElementById('projectsGrid');
-  if(!grid) return;
-  const dict = I18N[loadPrefs().lang || 'en'];
-
-  grid.innerHTML = '';
-  if(!data.projects.length){
-    const p = document.createElement('div');
-    p.className = 'placeholder';
-    p.textContent = dict.no_projects;
-    grid.appendChild(p);
-    return;
+  const grid=document.getElementById('projectsGrid');
+  try{
+    const r=await fetch(PUBLIC_JSON_PATH);
+    const d=await r.json();
+    grid.innerHTML='';
+    if(!d.projects.length){
+      grid.innerHTML=`<div>${I18N[loadPrefs().lang||'en'].no_projects}</div>`;
+      return;
+    }
+    d.projects.forEach(p=>{
+      const c=document.createElement('div');
+      c.className='project-card';
+      c.innerHTML=`
+        ${p.image?`<img src="${p.image}">`:''}
+        <strong>${p.title}</strong>
+        <p>${p.description||''}</p>
+      `;
+      grid.appendChild(c);
+    });
+  }catch{
+    grid.textContent='Failed to load projects';
   }
-
-  data.projects.forEach(pj=>{
-    const card = document.createElement('div');
-    card.className = 'project-card';
-    card.innerHTML = `
-      ${pj.image ? `<img src="${pj.image}" alt="Project">` : ``}
-      <strong>${pj.title || 'Untitled Project'}</strong>
-      <div class="muted" style="margin:6px 0">${pj.description || ''}</div>
-      ${pj.tags ? `<div class="tag-badges">${pj.tags.split(',').map(t=>`<span class="tag-badge">${t.trim()}</span>`).join('')}</div>` : ``}
-      ${pj.link ? `<a class="btn primary" href="${pj.link}" target="_blank">View Details</a>` : ``}
-    `;
-    grid.appendChild(card);
-  });
 }
 
-/* --- Boot --- */
-document.addEventListener('DOMContentLoaded', ()=>{
-  document.getElementById('year').textContent = new Date().getFullYear();
+/* ---------- Boot ---------- */
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('year').textContent=new Date().getFullYear();
   initTheme();
   initLang();
-  initContact();
+  initReveal();
   renderProjects();
 });
