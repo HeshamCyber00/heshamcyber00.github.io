@@ -207,9 +207,10 @@ body.light .hero-title { background: linear-gradient(to right, #000, #555); -web
   animation: float 6s ease-in-out infinite, spinSlowReverse 30s linear infinite;
 }
 
-@keyframes spinSlow { to { transform: rotate(360deg); } }
-@keyframes spinSlowReverse { to { transform: rotate(-360deg); } }
-@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
 
 /* =======================================================
    SKILLS (Grid + Hover Effects)
