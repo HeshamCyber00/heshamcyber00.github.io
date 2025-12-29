@@ -197,7 +197,7 @@ body.light .hero-title { background: linear-gradient(to right, #000, #555); -web
   position: relative; padding: 10px;
   border: 1px dashed var(--border-glow);
   border-radius: 50%;
-  animation: spinSlow 30s linear infinite;
+  /*animation: spinSlow 30s linear infinite;*/
 }
 .hero-avatar img {
   width: 250px; height: 250px; border-radius: 50%;
