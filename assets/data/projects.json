@@ -21,6 +21,20 @@
       "link": "https://heshamcyber00.github.io/-Arp-documentation/",
       "image": "https://i.postimg.cc/k4Pr9DZ1/dashboard.png",
       "tags": "Networking, Security, Python, Flask, Scapy"
+    },
+    {
+      "title": "SOC Automation & Global Attack Map",
+      "description": "Built an automated SOC simulation system that detects malicious IP activity, enriches it with geo-location data, logs events into Google Sheets, visualizes attacks on a global map, and automatically blocks attackers using Windows Firewall.\nTechnologies used: n8n, Python (Flask), Google Sheets API, Geo-IP APIs, Windows Firewall Automation, GitHub Pages.",
+      "link": "https://hesham66.github.io/soc-automation-portfolio/",
+      "image": "https://i.postimg.cc/HW8G2cMm/dashboard.png",
+      "tags": "Cyber Security, SOC, Automation, n8n, Python, Firewall"
+    },
+    {
+      "title": "SOC Automation & Global Attack Map",
+      "description": "Built an automated SOC simulation system that detects malicious IP activity, enriches it with geo-location data, logs events into Google Sheets, visualizes attacks on a global map, and automatically blocks attackers using Windows Firewall.\nTechnologies used: n8n, Python (Flask), Google Sheets API, Geo-IP APIs, Windows Firewall Automation, GitHub Pages.",
+      "link": "https://hesham66.github.io/soc-automation-portfolio/",
+      "image": "https://i.postimg.cc/HW8G2cMm/dashboard.png",
+      "tags": "Cyber Security, SOC, Automation, n8n, Python, Firewall"
     }
   ]
 }
